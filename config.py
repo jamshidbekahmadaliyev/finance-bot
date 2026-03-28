@@ -1,4 +1,4 @@
-TOKEN = "8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU"
+TOKEN = "8715514831:AAFRhfd1h5rqqUrNcMLMd2xm5jworwxKQAw"
 
 DB_HOST     = "aws-1-ap-south-1.pooler.supabase.com"
 DB_PORT     = "5432"

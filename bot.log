@@ -604,3 +604,204 @@
 2026-03-28 12:41:05,690 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
 2026-03-28 12:41:16,093 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
 2026-03-28 12:41:26,230 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:41:36,464 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:41:46,692 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:41:56,907 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:42:07,025 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:42:17,127 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:42:27,518 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:42:37,806 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:42:48,087 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:42:58,417 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:43:08,513 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:43:18,763 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:43:28,882 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:43:38,978 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:43:49,290 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:43:59,526 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:44:09,705 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:44:19,991 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 12:44:30,425 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getUpdates "HTTP/1.1 200 OK"
+2026-03-28 18:01:53,833 | INFO | Bot ishga tushmoqda...
+2026-03-28 18:01:57,558 | INFO | Bot polling boshlandi. To'xtatish: Ctrl+C
+2026-03-28 18:01:59,582 | INFO | HTTP Request: POST https://api.telegram.org/bot8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU/getMe "HTTP/1.1 401 Unauthorized"
+2026-03-28 18:01:59,584 | ERROR | Network Retry Loop (Bootstrap Initialize Application): Invalid token. Aborting retry loop.
+Traceback (most recent call last):
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 857, in initialize
+    await self.get_me()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 2008, in get_me
+    return await super().get_me(
+           ^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 990, in get_me
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.InvalidToken: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 136, in do_action
+    await action_cb()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_application.py", line 489, in initialize
+    await self.bot.initialize()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 316, in initialize
+    await super().initialize()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 860, in initialize
+    raise InvalidToken(f"The token `{self._token}` was rejected by the server.") from exc
+telegram.error.InvalidToken: The token `8715514831:AAGs0bAi4IU4cjtpg7vdiEvmY_bwzoqBVEU` was rejected by the server.
+2026-03-28 18:08:02,074 | INFO | Bot ishga tushmoqda...
+2026-03-28 18:08:05,629 | INFO | Bot polling boshlandi. To'xtatish: Ctrl+C
+2026-03-28 18:08:07,933 | INFO | HTTP Request: POST https://api.telegram.org/bot88715514831:AAFRhfd1h5rqqUrNcMLMd2xm5jworwxKQAw/getMe "HTTP/1.1 401 Unauthorized"
+2026-03-28 18:08:07,936 | ERROR | Network Retry Loop (Bootstrap Initialize Application): Invalid token. Aborting retry loop.
+Traceback (most recent call last):
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 857, in initialize
+    await self.get_me()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 2008, in get_me
+    return await super().get_me(
+           ^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 990, in get_me
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.InvalidToken: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 136, in do_action
+    await action_cb()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_application.py", line 489, in initialize
+    await self.bot.initialize()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 316, in initialize
+    await super().initialize()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 860, in initialize
+    raise InvalidToken(f"The token `{self._token}` was rejected by the server.") from exc
+telegram.error.InvalidToken: The token `88715514831:AAFRhfd1h5rqqUrNcMLMd2xm5jworwxKQAw` was rejected by the server.
+2026-03-28 18:11:48,460 | INFO | Bot ishga tushmoqda...
+2026-03-28 18:11:52,448 | INFO | Bot polling boshlandi. To'xtatish: Ctrl+C
+2026-03-28 18:11:52,965 | INFO | HTTP Request: POST https://api.telegram.org/bot88715514831:AAFRhfd1h5rqqUrNcMLMd2xm5jworwxKQAw/getMe "HTTP/1.1 401 Unauthorized"
+2026-03-28 18:11:52,966 | ERROR | Network Retry Loop (Bootstrap Initialize Application): Invalid token. Aborting retry loop.
+Traceback (most recent call last):
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 857, in initialize
+    await self.get_me()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 2008, in get_me
+    return await super().get_me(
+           ^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 990, in get_me
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.InvalidToken: Unauthorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 136, in do_action
+    await action_cb()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_application.py", line 489, in initialize
+    await self.bot.initialize()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\ext\_extbot.py", line 316, in initialize
+    await super().initialize()
+  File "C:\Users\Asus\Desktop\files\.venv\Lib\site-packages\telegram\_bot.py", line 860, in initialize
+    raise InvalidToken(f"The token `{self._token}` was rejected by the server.") from exc
+telegram.error.InvalidToken: The token `88715514831:AAFRhfd1h5rqqUrNcMLMd2xm5jworwxKQAw` was rejected by the server.
