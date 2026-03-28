@@ -1,0 +1,38 @@
+# =====================================================
+# finance_bot.service
+# =====================================================
+# Bu fayl botni VPS da 24/7 ishlashini ta'minlaydi.
+# VPS server o'chsa ham, qayta yonganda bot avtomatik ishga tushadi.
+#
+# JOYLASHTIRISH:
+#   sudo cp finance_bot.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable finance_bot
+#   sudo systemctl start finance_bot
+#
+# HOLAT TEKSHIRISH:
+#   sudo systemctl status finance_bot
+#
+# LOGLARNI KO'RISH:
+#   sudo journalctl -u finance_bot -f
+# =====================================================
+
+[Unit]
+Description=Shaxsiy Moliya Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+# Bot fayllari joylashgan papka:
+WorkingDirectory=/home/ubuntu/finance_bot
+# Python va main.py to'liq yo'li:
+ExecStart=/usr/bin/python3 /home/ubuntu/finance_bot/main.py
+# Xato bo'lsa 5 soniyadan keyin qayta ishga tushiradi
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/ubuntu/finance_bot/bot.log
+StandardError=append:/home/ubuntu/finance_bot/bot_error.log
+
+[Install]
+WantedBy=multi-user.target
