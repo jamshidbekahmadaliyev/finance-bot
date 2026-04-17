@@ -40,7 +40,7 @@ def create_tables():
     """
     conn = get_connection()
     if not conn:
-        return
+        return False
 
     cur = conn.cursor()
     try:
@@ -69,9 +69,29 @@ def create_tables():
 
         conn.commit()
         print("[DB] Jadvallar tayyor.")
+        return True
     except Error as e:
         print(f"[DB] Jadval yaratish xatosi: {e}")
         conn.rollback()
+        return False
+    finally:
+        cur.close()
+        conn.close()
+
+
+def check_connection() -> tuple[bool, str]:
+    """DB ulanishini tekshiradi va sabab bilan natija qaytaradi."""
+    conn = get_connection()
+    if not conn:
+        return False, "DB ga ulanib bo'lmadi"
+
+    cur = conn.cursor()
+    try:
+        cur.execute("SELECT 1;")
+        cur.fetchone()
+        return True, "OK"
+    except Error as e:
+        return False, str(e)
     finally:
         cur.close()
         conn.close()

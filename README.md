@@ -1,9 +1,28 @@
 # 🚀 Shaxsiy Moliya Boti — O'rnatish Yo'riqnomasi
 
+## Muhim: maxfiy ma'lumotlar
+- Endi `config.py` ichiga token yoki DB parol yozilmaydi.
+- Barcha maxfiy qiymatlar `.env` faylida saqlanadi.
+- `.env` git ga kirmaydi (`.gitignore` da bor).
+
+### `.env` tayyorlash
+1. `.env.example` nusxasini oling va `.env` nomi bilan saqlang.
+2. Ichiga o'zingizning real qiymatlarni kiriting:
+
+```env
+BOT_TOKEN=...
+DB_HOST=...
+DB_PORT=5432
+DB_NAME=postgres
+DB_USER=...
+DB_PASSWORD=...
+```
+
 ## 📁 Fayl tuzilmasi
 ```
 finance_bot/
-├── config.py           ← Token va DB sozlamalari
+├── config.py           ← .env dan sozlamalarni o'qiydi
+├── .env.example        ← .env uchun namuna
 ├── db.py               ← Database funksiyalari
 ├── main.py             ← Bot asosiy kodi
 ├── requirements.txt    ← Kerakli kutubxonalar
@@ -121,3 +140,40 @@ sudo systemctl restart finance_bot
 qarz_berdim 300000 Aliga  ← Qarz berdim
 qarz_oldim 100000 ukamdan ← Qarz oldim
 ```
+
+---
+
+## 6️⃣ Tekin serverga qo'yish (Render)
+
+Bu usulda bot 24/7 ga yaqin ishlaydi va webhook rejimida yuradi.
+
+1. Kodni GitHub repoga joylang.
+2. https://render.com ga kiring va akkaunt oching.
+3. **New +** → **Web Service** → GitHub repo ni ulang.
+4. Render sozlamalari:
+   - Runtime: Python
+   - Build command: `pip install -r requirements.txt`
+   - Start command: `python main.py`
+   - Plan: Free
+5. Environment Variables bo'limida quyidagilarni kiriting:
+   - `BOT_TOKEN`
+   - `DB_HOST`
+   - `DB_PORT`
+   - `DB_NAME`
+   - `DB_USER`
+   - `DB_PASSWORD`
+   - `USE_WEBHOOK=true`
+   - `WEBHOOK_PATH=/telegram`
+   - `WEBHOOK_SECRET=<ixtiyoriy-maxfiy-token>`
+6. Deploy qiling.
+7. Deploy bo'lgach servis URL chiqadi, masalan:
+   - `https://your-service-name.onrender.com`
+8. Shu URL ni `WEBHOOK_URL` sifatida Render env ga qo'shing va qayta deploy qiling.
+
+Misol:
+- `WEBHOOK_URL=https://your-service-name.onrender.com`
+- Bot webhook endpoint: `https://your-service-name.onrender.com/telegram`
+
+Eslatma:
+- Agar `USE_WEBHOOK=true` bo'lsa, `WEBHOOK_URL` bo'sh bo'lmasligi shart.
+- Localda ishlatishda `USE_WEBHOOK=false` qoldiring, bot polling rejimida ishlaydi.
