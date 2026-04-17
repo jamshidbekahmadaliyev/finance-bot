@@ -132,6 +132,11 @@ sudo systemctl restart finance_bot
 | `/analiz` | Umumiy balans va statistika |
 | `/report` | Oxirgi 10 ta yozuv |
 | `/oylik` | Oxirgi 30 kunlik hisobot |
+| `/bugun` | Bugungi chiqim |
+| `/oyqoldiq` | Shu oydagi qoldiq |
+| `/setbudget` | Limit o'rnatish |
+| `/budgets` | Limitlarni ko'rish |
+| `/reminders` | Eslatma sozlash |
 
 ### Yozish formati:
 ```
@@ -139,6 +144,25 @@ sudo systemctl restart finance_bot
 -45000 supermarket        ← Chiqim
 qarz_berdim 300000 Aliga  ← Qarz berdim
 qarz_oldim 100000 ukamdan ← Qarz oldim
+```
+
+Yangi tugmali format (tavsiya):
+```
+150000 ovqat tushlik
+90000 transport taksi
+```
+
+Budjet limiti misoli:
+```bash
+/setbudget daily 200000
+/setbudget weekly 1200000
+/setbudget monthly 4000000
+```
+
+Eslatma sozlash:
+```bash
+/reminders on daily
+/reminders off weekly
 ```
 
 ---
@@ -176,4 +200,16 @@ Misol:
 
 Eslatma:
 - Agar `USE_WEBHOOK=true` bo'lsa, `WEBHOOK_URL` bo'sh bo'lmasligi shart.
+- `WEBHOOK_URL` faqat `https://` bilan bo'lishi kerak.
+- `WEBHOOK_SECRET` bo'sh qoldirmang (uzun, tasodifiy secret bering).
 - Localda ishlatishda `USE_WEBHOOK=false` qoldiring, bot polling rejimida ishlaydi.
+
+---
+
+## 7️⃣ Xavfsizlik checklist
+
+- `.env` hech qachon GitHub ga yuklanmasin.
+- Bot token va DB parolni muntazam yangilang (rotate).
+- Supabase da kuchli parol va kerak bo'lsa IP/network cheklovlardan foydalaning.
+- `bot.log` ni public joyga chiqarmang.
+- Render'da barcha maxfiy qiymatlarni faqat Environment Variables ga kiriting.
