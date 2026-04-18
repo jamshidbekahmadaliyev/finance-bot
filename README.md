@@ -193,6 +193,34 @@ Eslatma:
 
 ---
 
+## 6️⃣.1 Railway ga qo'yish (24/7)
+
+Railway'da bot kompyuteringiz o'chiq bo'lsa ham ishlaydi.
+
+1. Railway'da yangi project oching va `finance-bot` GitHub repo ni ulang.
+2. Service Variables (Environment) ga quyidagilarni kiriting:
+   - `BOT_TOKEN`
+   - `DB_HOST`
+   - `DB_PORT`
+   - `DB_NAME`
+   - `DB_USER`
+   - `DB_PASSWORD`
+   - `USE_WEBHOOK=true`
+   - `WEBHOOK_PATH=/telegram`
+   - `WEBHOOK_SECRET=<uzun_maxfiy_token>`
+3. Railway service URL ni oling, masalan: `https://finance-bot-production.up.railway.app`
+4. Shu URL ni `WEBHOOK_URL` ga qo'ying.
+5. Redeploy qiling.
+
+Tekshiruv:
+- Deploy logda `Webhook rejimi yoqildi` chiqishi kerak.
+- Telegram botga `/start` yuborganda javob qaytishi kerak.
+
+Eslatma:
+- Agar `WEBHOOK_URL` yoki `WEBHOOK_SECRET` xato bo'lsa, kod avtomatik `polling fallback`ga o'tadi.
+
+---
+
 ## 7️⃣ Xavfsizlik checklist
 
 - `.env` hech qachon GitHub ga yuklanmasin.
