@@ -271,9 +271,11 @@ async def dashboard_cmd(update: Update, _: ContextTypes.DEFAULT_TYPE):
         loan_lines.append(f"- {person}: berdim {fmt_money(int(bergan or 0))}, oldim {fmt_money(int(olgan or 0))}, saldo {fmt_money(saldo)}")
     if not loan_lines:
         loan_lines = ["- Qarz ma'lumoti yo'q"]
+    loan_block = "\n".join(loan_lines)
 
     trend_rows = get_daily_expense_series(uid, 7)
     trend_lines = [f"- {d.strftime('%d.%m')}: {fmt_money(int(v or 0))}" for d, v in trend_rows]
+    trend_block = "\n".join(trend_lines)
     text = (
         "📊 DASHBOARD\n\n"
         f"💼 Joriy balans: {fmt_money(s['current_balance'])}\n"
@@ -284,9 +286,9 @@ async def dashboard_cmd(update: Update, _: ContextTypes.DEFAULT_TYPE):
         f"📌 Operatsion natija (kirim-chiqim): {fmt_money(s['sof_operatsion'])}\n"
         f"📌 Qarz saldosi (bergan-oldim): {fmt_money(s['qarz_saldo'])}\n\n"
         "👥 Qarzlar odamlar kesimida:\n"
-        f"{'\n'.join(loan_lines)}\n\n"
+        f"{loan_block}\n\n"
         "📉 Oxirgi 7 kun chiqim:\n"
-        f"{'\n'.join(trend_lines)}"
+        f"{trend_block}"
     )
     await update.message.reply_text(text, reply_markup=menu_keyboard())
 
