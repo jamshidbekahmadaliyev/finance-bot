@@ -356,8 +356,9 @@ async def limit_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
         profile = get_user_profile(uid)
         lim = profile.get("spend_limit_daily")
+        lim_text = fmt_money(lim) if lim else "o'rnatilmagan"
         await update.message.reply_text(
-            f"🎯 Kunlik limit: {fmt_money(lim) if lim else 'o\'rnatilmagan'}\n/setlimit 300000\n/setlimit 0  (o'chirish)",
+            f"🎯 Kunlik limit: {lim_text}\n/setlimit 300000\n/setlimit 0  (o'chirish)",
             reply_markup=menu_keyboard(),
         )
         return
@@ -609,10 +610,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if text == "🔔 Eslatma":
         p = get_user_profile(uid)
+        remind_state = "yoqilgan" if p["remind_daily"] else "o'chirilgan"
+        daily_limit_text = fmt_money(p["spend_limit_daily"]) if p["spend_limit_daily"] else "o'rnatilmagan"
         await update.message.reply_text(
-            f"🔔 Eslatma: {'yoqilgan' if p['remind_daily'] else 'o\'chirilgan'}\n"
+            f"🔔 Eslatma: {remind_state}\n"
             f"Vaqt: {p['reminder_time']}\n"
-            f"Kunlik limit: {fmt_money(p['spend_limit_daily']) if p['spend_limit_daily'] else 'o\'rnatilmagan'}\n\n"
+            f"Kunlik limit: {daily_limit_text}\n\n"
             "Yoqish/o'chirish: /remindon yoki /remindoff\n"
             "Vaqt berish: /setreminder 21:30\n"
             "Limit berish: /setlimit 300000",
