@@ -61,7 +61,7 @@ ACTION_BUTTONS = {
     "➕ Kirim qo'shish": "kirim",
     "➖ Chiqim qo'shish": "chiqim",
     "🤝 Qarz berdim": "qarz_berdim",
-    "🤲 Qarz oldim": "qarz_oldim",
+    "💳 Qarz oldim": "qarz_oldim",
 }
 
 BOT_SHORT_DESCRIPTION = "Shaxsiy moliya boti: kirim, chiqim, qarz, balans"
@@ -75,9 +75,11 @@ BOT_DESCRIPTION = (
 def menu_keyboard() -> ReplyKeyboardMarkup:
     keyboard = [
         ["➕ Kirim qo'shish", "➖ Chiqim qo'shish"],
-        ["🤝 Qarz berdim", "🤲 Qarz oldim"],
-        ["📊 Dashboard", "📜 Report"],
+        ["🤝 Qarz berdim", "💳 Qarz oldim"],
+        ["📊 Dashboard", "📜 Report (50)"],
         ["📅 Oylik", "🧾 Davr bo'yicha"],
+        ["💵 Boshlang'ich balans", "🎯 Kunlik limit"],
+        ["⏰ Eslatma vaqti", "🔔 Eslatma ON/OFF"],
         ["💰 Balans", "🔔 Eslatma"],
         ["❓ Yordam"],
     ]
@@ -148,7 +150,7 @@ def render_tx_list(rows: list, title: str, max_items: int = 25) -> str:
         "kirim": "💰",
         "chiqim": "💸",
         "qarz_berdim": "🤝",
-        "qarz_oldim": "🤲",
+        "qarz_oldim": "💳",
     }
     lines = [title]
     for sana, tur, miqdor, kategoriya, counterpart, izoh, balance_after in rows[:max_items]:
@@ -199,19 +201,20 @@ async def help_cmd(update: Update, _: ContextTypes.DEFAULT_TYPE):
     text = (
         "❓ Yordam (aniq ishlatish)\n\n"
         "Asosiy 4 amal:\n"
-        "- ➕ Kirim\n- ➖ Chiqim\n- 🤝 Qarz berdim\n- 🤲 Qarz oldim\n\n"
+        "- ➕ Kirim\n- ➖ Chiqim\n- 🤝 Qarz berdim\n- 💳 Qarz oldim\n\n"
         "Kirim/Chiqim formati: `miqdor kategoriya izoh`\n"
         "Misol: `120000 ovqat tushlik`\n\n"
         "Qarz formati: `miqdor ism izoh`\n"
         "Misol: `500000 Sardor qaytaradi`\n\n"
-        "Kerakli buyruqlar:\n"
+        "Tugmalar orqali ishlatsangiz bo'ladi, buyruqlar majburiy emas.\n"
+        "Agar buyruq bilan ishlatsangiz:\n"
         "- /setbalans 5000000\n"
-        "- /report [limit]  (masalan /report 50)\n"
-        "- /oylik [YYYY-MM] (masalan /oylik 2026-04)\n"
-        "- /davr YYYY-MM-DD YYYY-MM-DD\n"
+        "- /report 50\n"
+        "- /oylik 2026-04\n"
+        "- /davr 2026-04-01 2026-04-30\n"
         "- /setlimit 300000\n"
         "- /setreminder 21:30\n"
-        "- /remindon | /remindoff\n\n"
+        "- /remindon yoki /remindoff\n\n"
         f"{balance_line(uid)}"
     )
     await update.message.reply_text(text, parse_mode="Markdown", reply_markup=menu_keyboard())
@@ -235,7 +238,11 @@ async def set_balance_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not ok:
         await update.message.reply_text("⚠️ Balans saqlanmadi.", reply_markup=menu_keyboard())
         return
-    await update.message.reply_text(f"✅ Boshlang'ich balans saqlandi: {fmt_money(amount)}", reply_markup=menu_keyboard())
+    await update.message.reply_text(
+        f"✅ Boshlang'ich balans saqlandi: {fmt_money(amount)}\n"
+        f"💼 Hozirgi balansingiz: {fmt_money(amount)}",
+        reply_markup=menu_keyboard(),
+    )
 
 
 def daily_limit_warning(user_id: int) -> str:
@@ -287,7 +294,7 @@ async def dashboard_cmd(update: Update, _: ContextTypes.DEFAULT_TYPE):
 async def report_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     save_user(update)
     uid = update.message.from_user.id
-    limit = 20
+    limit = 50
     if context.args and context.args[0].isdigit():
         limit = max(1, min(200, int(context.args[0])))
 
@@ -318,7 +325,7 @@ async def monthly_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("📭 Bu oyda amal topilmadi.", reply_markup=menu_keyboard())
         return
 
-    text = render_tx_list(rows, f"📅 {year}-{month:02d} oylik hisobot", max_items=35)
+    text = render_tx_list(rows, f"📅 {year}-{month:02d} oylik hisobot", max_items=50)
     await update.message.reply_text(text, reply_markup=menu_keyboard())
 
 
@@ -337,7 +344,7 @@ async def range_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not rows:
         await update.message.reply_text("📭 Bu davrda amal topilmadi.", reply_markup=menu_keyboard())
         return
-    text = render_tx_list(rows, f"🧾 {start_date} dan {end_date} gacha", max_items=40)
+    text = render_tx_list(rows, f"🧾 {start_date} dan {end_date} gacha", max_items=50)
     await update.message.reply_text(text, reply_markup=menu_keyboard())
 
 
@@ -444,6 +451,7 @@ async def handle_transaction_entry(update: Update, context: ContextTypes.DEFAULT
             )
             return
         ok, new_balance, msg = add_transaction(uid, action, amount, category, note, None)
+        source_text = f"🏷 Kategoriya: {category}\n📝 Izoh: {note}"
     else:
         amount, person, note = parse_amount_person_note(text)
         if amount is None:
@@ -454,6 +462,7 @@ async def handle_transaction_entry(update: Update, context: ContextTypes.DEFAULT
             )
             return
         ok, new_balance, msg = add_transaction(uid, action, amount, "qarz", note, person)
+        source_text = f"👤 Kim bilan: {person}\n📝 Izoh: {note}"
 
     if not ok:
         await update.message.reply_text(f"⚠️ Amal saqlanmadi: {msg}", reply_markup=menu_keyboard())
@@ -461,14 +470,20 @@ async def handle_transaction_entry(update: Update, context: ContextTypes.DEFAULT
         return
 
     label = {
-        "kirim": "✅ Kirim saqlandi",
-        "chiqim": "✅ Chiqim saqlandi",
+        "kirim": "✅ Kirim qo'shildi",
+        "chiqim": "✅ Chiqim qo'shildi",
         "qarz_berdim": "✅ Qarz berdingiz",
         "qarz_oldim": "✅ Qarz oldingiz",
     }[action]
     warn = daily_limit_warning(uid) if action == "chiqim" else ""
+    flow_text = {
+        "kirim": "Pul qo'shildi va balans oshdi.",
+        "chiqim": "Pul ishlatildi va balans kamaydi.",
+        "qarz_berdim": "Qarz berdingiz, balansdan ayrildi.",
+        "qarz_oldim": "Qarz oldingiz, balansga qo'shildi.",
+    }[action]
     await update.message.reply_text(
-        f"{label}\n💼 Yangi balans: {fmt_money(new_balance)}{warn}",
+        f"{label}\n{source_text}\n{flow_text}\n💼 Endi qolgan pulingiz: {fmt_money(new_balance)}{warn}",
         reply_markup=menu_keyboard(),
     )
     context.user_data.pop("pending_action", None)
@@ -483,7 +498,56 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if text == "⬅️ Bekor qilish":
         context.user_data.pop("pending_action", None)
+        context.user_data.pop("awaiting_setup", None)
         await update.message.reply_text("Bekor qilindi.", reply_markup=menu_keyboard())
+        return
+
+    # Step-based quick setup from buttons
+    if context.user_data.get("awaiting_setup") == "setbalans":
+        raw = text.replace(" ", "").replace("_", "")
+        if not raw.isdigit():
+            await update.message.reply_text("❌ Faqat raqam kiriting. Masalan: 5000000", reply_markup=cancel_keyboard())
+            return
+        amount = int(raw)
+        if amount < 0:
+            await update.message.reply_text("❌ Balans manfiy bo'lmaydi.", reply_markup=cancel_keyboard())
+            return
+        ok = set_opening_balance(uid, amount)
+        context.user_data.pop("awaiting_setup", None)
+        if not ok:
+            await update.message.reply_text("⚠️ Balans saqlanmadi.", reply_markup=menu_keyboard())
+            return
+        await update.message.reply_text(
+            f"✅ Boshlang'ich pulingiz saqlandi: {fmt_money(amount)}\n💼 Hozirgi balans: {fmt_money(amount)}",
+            reply_markup=menu_keyboard(),
+        )
+        return
+
+    if context.user_data.get("awaiting_setup") == "setlimit":
+        raw = text.replace(" ", "").replace("_", "")
+        if not raw.isdigit():
+            await update.message.reply_text("❌ Faqat raqam kiriting. Masalan: 300000", reply_markup=cancel_keyboard())
+            return
+        amount = int(raw)
+        ok = set_spend_limit_daily(uid, None if amount == 0 else amount)
+        context.user_data.pop("awaiting_setup", None)
+        if not ok:
+            await update.message.reply_text("⚠️ Limit saqlanmadi.", reply_markup=menu_keyboard())
+            return
+        await update.message.reply_text("✅ Kunlik limit saqlandi.", reply_markup=menu_keyboard())
+        return
+
+    if context.user_data.get("awaiting_setup") == "setreminder":
+        hhmm = text.strip()
+        if not parse_hhmm(hhmm):
+            await update.message.reply_text("❌ Format HH:MM bo'lsin. Masalan: 21:30", reply_markup=cancel_keyboard())
+            return
+        ok = set_reminder_time(uid, hhmm)
+        context.user_data.pop("awaiting_setup", None)
+        if not ok:
+            await update.message.reply_text("⚠️ Eslatma vaqti saqlanmadi.", reply_markup=menu_keyboard())
+            return
+        await update.message.reply_text(f"✅ Eslatma vaqti saqlandi: {hhmm}", reply_markup=menu_keyboard())
         return
 
     if text in ACTION_BUTTONS:
@@ -507,7 +571,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text == "📊 Dashboard":
         await dashboard_cmd(update, context)
         return
-    if text == "📜 Report":
+    if text == "📜 Report" or text == "📜 Report (50)":
         await report_cmd(update, context)
         return
     if text == "📅 Oylik":
@@ -519,6 +583,26 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text == "💰 Balans":
         await update.message.reply_text(
             f"{balance_line(uid)}\nBalans o'rnatish: /setbalans 5000000", reply_markup=menu_keyboard()
+        )
+        return
+    if text == "💵 Boshlang'ich balans":
+        context.user_data["awaiting_setup"] = "setbalans"
+        await update.message.reply_text("Sizda hozir qancha pul bor? Faqat raqam kiriting.\nMasalan: 5000000", reply_markup=cancel_keyboard())
+        return
+    if text == "🎯 Kunlik limit":
+        context.user_data["awaiting_setup"] = "setlimit"
+        await update.message.reply_text("Kunlik limitni kiriting (0 bo'lsa o'chadi).\nMasalan: 300000", reply_markup=cancel_keyboard())
+        return
+    if text == "⏰ Eslatma vaqti":
+        context.user_data["awaiting_setup"] = "setreminder"
+        await update.message.reply_text("Qaysi vaqtda eslatsin? HH:MM formatda yozing.\nMasalan: 21:30", reply_markup=cancel_keyboard())
+        return
+    if text == "🔔 Eslatma ON/OFF":
+        p = get_user_profile(uid)
+        now_state = "yoqilgan" if p["remind_daily"] else "o'chirilgan"
+        await update.message.reply_text(
+            f"Hozir eslatma: {now_state}\nYoqish: /remindon\nO'chirish: /remindoff",
+            reply_markup=menu_keyboard(),
         )
         return
     if text == "🔔 Eslatma":
@@ -588,21 +672,22 @@ def main():
         app.job_queue.run_repeating(reminders_tick, interval=60, first=15, name="per_user_reminders")
 
     if USE_WEBHOOK:
-        if not WEBHOOK_URL or not WEBHOOK_SECRET:
-            log.error("Webhook uchun WEBHOOK_URL va WEBHOOK_SECRET kerak")
+        if WEBHOOK_URL and WEBHOOK_SECRET and WEBHOOK_URL.startswith("https://"):
+            clean_base = WEBHOOK_URL.rstrip("/")
+            clean_path = WEBHOOK_PATH if WEBHOOK_PATH.startswith("/") else f"/{WEBHOOK_PATH}"
+            log.info("Webhook rejimi yoqildi: %s%s", clean_base, clean_path)
+            app.run_webhook(
+                listen="0.0.0.0",
+                port=PORT,
+                url_path=clean_path.lstrip("/"),
+                webhook_url=f"{clean_base}{clean_path}",
+                secret_token=WEBHOOK_SECRET,
+                allowed_updates=Update.ALL_TYPES,
+            )
             return
-        clean_base = WEBHOOK_URL.rstrip("/")
-        clean_path = WEBHOOK_PATH if WEBHOOK_PATH.startswith("/") else f"/{WEBHOOK_PATH}"
-        app.run_webhook(
-            listen="0.0.0.0",
-            port=PORT,
-            url_path=clean_path.lstrip("/"),
-            webhook_url=f"{clean_base}{clean_path}",
-            secret_token=WEBHOOK_SECRET,
-            allowed_updates=Update.ALL_TYPES,
-        )
-        return
+        log.warning("USE_WEBHOOK=true lekin WEBHOOK sozlamasi to'liq emas, polling fallback ishlaydi.")
 
+    log.info("Polling rejimi ishga tushdi")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 

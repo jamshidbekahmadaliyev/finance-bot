@@ -129,14 +129,14 @@ sudo systemctl restart finance_bot
 |--------|--------|
 | `/start` | Botni boshlash |
 | `/help` | Yordam |
-| `/analiz` | Umumiy balans va statistika |
-| `/report` | Oxirgi 10 ta yozuv |
-| `/oylik` | Oxirgi 30 kunlik hisobot |
-| `/bugun` | Bugungi chiqim |
-| `/oyqoldiq` | Shu oydagi qoldiq |
-| `/setbudget` | Limit o'rnatish |
-| `/budgets` | Limitlarni ko'rish |
-| `/reminders` | Eslatma sozlash |
+| `/dashboard` | Asosiy ko'rsatkichlar |
+| `/report 50` | Oxirgi 50 ta amal |
+| `/oylik 2026-04` | Oylik hisobot |
+| `/davr 2026-04-01 2026-04-30` | Sana oralig'i hisobot |
+| `/setbalans 5000000` | Boshlang'ich pulni saqlash |
+| `/setlimit 300000` | Kunlik limit |
+| `/setreminder 21:30` | Eslatma vaqti |
+| `/remindon` / `/remindoff` | Eslatma ON/OFF |
 
 ### Yozish formati:
 ```
@@ -150,19 +150,6 @@ Yangi tugmali format (tavsiya):
 ```
 150000 ovqat tushlik
 90000 transport taksi
-```
-
-Budjet limiti misoli:
-```bash
-/setbudget daily 200000
-/setbudget weekly 1200000
-/setbudget monthly 4000000
-```
-
-Eslatma sozlash:
-```bash
-/reminders on daily
-/reminders off weekly
 ```
 
 ---
